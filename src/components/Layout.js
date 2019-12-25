@@ -10,8 +10,6 @@ const StyledLayout = styled.div`
   grid-template-rows: 50px 1fr 50px;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 100vh;
-  width: 100vw;
 
   main {
     background-color: var(--color-white);

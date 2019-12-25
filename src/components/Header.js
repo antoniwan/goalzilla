@@ -6,8 +6,10 @@ import { TiHomeOutline } from "react-icons/ti";
 const StyledHeader = styled.header`
   background-color: var(--background-color);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding: 0 15px;
+  border-bottom: 1px solid var(--color-silver);
 
   a {
     display: inline-block;
