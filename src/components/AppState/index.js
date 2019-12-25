@@ -6,6 +6,7 @@ import StateContext, {
 } from "./context";
 import StateReducer from "./reducer";
 
+export default StateProvider;
 export {
   initialState,
   StateContext,
