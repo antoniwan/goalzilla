@@ -53,12 +53,12 @@ export default function Header() {
               <strong>All</strong>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/">Counters</Link>
           </li>
           <li>
             <Link to="/">Countdowns</Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </StyledHeader>

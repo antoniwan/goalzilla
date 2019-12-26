@@ -170,7 +170,7 @@ export default function AddEntryForm() {
             onChange={handleTypeRadioChange}
             checked={formDisplayHelper.isCounter}
           />
-          Counter
+          Counter (days passed)
         </label>
 
         <label>
@@ -182,7 +182,7 @@ export default function AddEntryForm() {
             onChange={handleTypeRadioChange}
             checked={formDisplayHelper.isCountdown}
           />
-          Countdown (Not implemented!)
+          Countdown to a date
         </label>
       </div>
 
