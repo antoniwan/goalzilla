@@ -9,15 +9,33 @@ const StyledHeader = styled.header`
   justify-content: flex-start;
   align-items: center;
   padding: 0 15px;
-  border-bottom: 1px solid var(--color-silver);
+  border-bottom: 2px solid var(--color-silver);
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      margin-left: 1rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
 
   a {
     display: inline-block;
     color: var(--color-black);
-    font-size: 2rem;
+    font-size: 0.8rem;
     text-decoration: none;
     margin: 0;
-    font-weight: bold;
+    font-weight: 100;
     letter-spacing: 1px;
   }
   span {
@@ -28,9 +46,21 @@ const StyledHeader = styled.header`
 export default function Header() {
   return (
     <StyledHeader>
-      <Link to="/">
-        <TiHomeOutline />
-      </Link>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">
+              <strong>All</strong>
+            </Link>
+          </li>
+          <li>
+            <Link to="/">Counters</Link>
+          </li>
+          <li>
+            <Link to="/">Countdowns</Link>
+          </li>
+        </ul>
+      </nav>
     </StyledHeader>
   );
 }

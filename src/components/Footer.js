@@ -14,7 +14,7 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   padding: 5px 15px;
-  border-top: 1px solid var(--color-silver);
+  border-top: 2px solid var(--color-silver);
 `;
 
 export default function Footer() {

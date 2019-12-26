@@ -26,9 +26,10 @@ const StyledEntry = styled.li`
   .description {
     flex-grow: 1;
     margin-left: 1rem;
+    line-height: 1.4;
   }
   .timer {
-    font-weight: bold;
+    font-weight: 100;
     transition: all 0.1s;
     flex-basis: 50px;
   }
@@ -39,6 +40,9 @@ const StyledEntry = styled.li`
     padding: 0;
     margin: 0;
     cursor: pointer;
+    text-align: left;
+    color: var(--color-green);
+    line-height: 1.4;
   }
 
   .timer-distance {
@@ -89,9 +93,7 @@ export default function Entry(entry) {
         </button>
       </div>
 
-      <div className="description">
-        <span>{displayHelper.description}</span>
-      </div>
+      <p className="description">{displayHelper.description}</p>
     </StyledEntry>
   );
 }
