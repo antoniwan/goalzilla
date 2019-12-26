@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GlobalStyles from "./GlobalStyles";
 import Footer from "./Footer";
 import Header from "./Header";
+import AddEntryPanel from "./AddEntryPanel";
 
 const StyledLayout = styled.div`
   display: grid;
@@ -26,6 +27,7 @@ export default function Layout({
       <GlobalStyles />
       {header}
       <main>{children}</main>
+      <AddEntryPanel />
       {footer}
     </StyledLayout>
   );

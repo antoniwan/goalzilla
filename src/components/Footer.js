@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { TiPlus } from "react-icons/ti";
+import { TiPlus, TiTimes } from "react-icons/ti";
 import { useStateValue } from "./AppState";
 import Button from "./Button";
 
@@ -19,14 +19,19 @@ const StyledFooter = styled.footer`
 
 export default function Footer() {
   const [state, dispatch] = useStateValue();
+  const { isOpen } = state.addEntryPanel;
 
   const handleAddEntryClick = function() {
-    console.log("add entry!");
+    dispatch({
+      type: isOpen ? "closeAddEntryPanel" : "openAddEntryPanel"
+    });
   };
+
+  const icon = isOpen ? <TiTimes /> : <TiPlus />;
 
   return (
     <StyledFooter>
-      <Button icon={<TiPlus />} handleClick={handleAddEntryClick}>
+      <Button icon={icon} handleClick={handleAddEntryClick}>
         <TiPlus />
       </Button>
     </StyledFooter>

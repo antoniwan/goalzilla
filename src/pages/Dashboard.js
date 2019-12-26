@@ -3,8 +3,8 @@ import { useStateValue } from "../components/AppState";
 import Layout from "../components/Layout";
 
 export default function Dashboard() {
-  const [state, dispatch] = useStateValue();
+  const [state] = useStateValue();
 
-  console.log(state);
+  console.log(`State Info`, state);
   return <Layout>dashboard</Layout>;
 }

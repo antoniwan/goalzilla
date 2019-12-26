@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   background: none;
   border: 0;
-  padding: 10px 20px;
+  padding: 5px 20px;
   text-align: center;
 `;
 

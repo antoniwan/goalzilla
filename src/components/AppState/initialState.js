@@ -1,6 +1,6 @@
 const initialState = {
   addEntryPanel: {
-    open: false
+    isOpen: false
   },
   entries: []
 };
