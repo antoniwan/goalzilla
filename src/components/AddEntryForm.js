@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const StyledAddEntryForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 0;
 
   .form-input {
     padding-top: 1rem;
@@ -47,6 +48,13 @@ const StyledAddEntryForm = styled.form`
     color: var(--color-white);
     padding: 8px 20px;
     border-radius: 5px;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-shocking-green);
+      color: var(--color-black);
+    }
   }
 
   .react-datepicker-wrapper {
@@ -56,21 +64,37 @@ const StyledAddEntryForm = styled.form`
 `;
 
 export default function AddEntryForm() {
+  const [loading, setLoading] = useState(false);
   const [entryType, setEntryType] = useState("type-counter");
+  const [startsOn, setStartsOn] = useState(new Date());
+  const [description, setDescription] = useState("");
+  const dateFormat = `MMMM d, yyyy`;
+
   let formDisplayHelper = {
     isCounter: entryType === `type-counter` ? true : false,
     isCountdown: entryType === `type-countdown` ? true : false,
     counterChecked: entryType === `type-counter` ? true : false,
     countdownChecked: entryType === `type-countdown` ? true : false,
     descriptionPlaceholder:
-      entryType === `type-counter` ? `Days without bread` : `Days until...`
+      entryType === `type-counter` ? `Days without bread` : `Days until...`,
+    submitCTA:
+      entryType === `type-counter` ? `Create counter` : `Create countdown`
   };
 
   const handleTypeRadioChange = function(e) {
     setEntryType(e.target.id);
   };
 
-  console.info(`AddEntryForm State`, { entryType });
+  const handleDatePickerChange = function(e) {
+    setStartsOn(e);
+  };
+
+  console.info(
+    `AddEntryForm State`,
+    { entryType },
+    { startsOn },
+    { description }
+  );
 
   return (
     <StyledAddEntryForm name="add-entry">
@@ -94,10 +118,10 @@ export default function AddEntryForm() {
             id="type-countdown"
             name="type"
             value="countdown"
-            onChange={handleTypeRadioChange}
+            onChange={date => setStartsOn(date)}
             checked={formDisplayHelper.countdownChecked}
           />
-          Countdown
+          Countdown (Not implemented!)
         </label>
       </div>
 
@@ -118,7 +142,18 @@ export default function AddEntryForm() {
           <div className="form-input form-input-starts-on">
             <label>
               Starts on
-              <Datepicker />
+              <Datepicker
+                todayButton="Today"
+                selected={startsOn}
+                onChange={handleDatePickerChange}
+                maxDate={new Date()}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                shouldCloseOnSelect={true}
+                dateFormat={dateFormat}
+              />
             </label>
           </div>
         </>
@@ -129,14 +164,14 @@ export default function AddEntryForm() {
           <div className="form-input form-input-counts-down-to">
             <label>
               Counts down to
-              <Datepicker />
+              {/* <Datepicker /> */}
             </label>
           </div>
         </>
       )}
 
       <div className="form-input form-input-submit">
-        <input type="submit" value="Create entry" disabled={true}></input>
+        <input type="submit" value={formDisplayHelper.submitCTA}></input>
       </div>
     </StyledAddEntryForm>
   );

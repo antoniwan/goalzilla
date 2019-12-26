@@ -10,7 +10,7 @@ const StyledAddEntryPanel = styled.section`
   width: 100%;
   transition: all 0.5s;
   padding: 15px;
-  border-top: 1px solid var(--color-silver);
+  border-top: 4px solid var(--color-silver);
   background: var(--color-white);
 
   &.is-open {
