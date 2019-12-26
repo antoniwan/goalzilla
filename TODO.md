@@ -10,3 +10,5 @@
 - In the counter add entry form, if the date is future, change the copy to reflect this
 - add animations to the submit buttons
 - refactor AddEntryForm's state to use reducers exclusively
+- make sounds / alerts / SMS when a timer is done (?)
+- fix absurdly big dates

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import uuidv1 from "uuid/v1";
 import {
   formatDateForDateInput,
   formatDateForReading,
@@ -110,6 +111,7 @@ export default function AddEntryForm() {
     await setLoading(true);
 
     const formData = {
+      id: uuidv1(),
       entryType,
       startsOn,
       countsDownTo,
