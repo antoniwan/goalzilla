@@ -86,6 +86,10 @@ export default function AddEntryForm() {
     formatValue: formatDateForDateInput(now),
     rawValue: now
   });
+  const [countsDownTo, setcountsDownTo] = useState({
+    formatValue: formatDateForDateInput(now),
+    rawValue: now
+  });
   const [description, setDescription] = useState("");
 
   let formDisplayHelper = {
@@ -108,6 +112,7 @@ export default function AddEntryForm() {
     const formData = {
       entryType,
       startsOn,
+      countsDownTo,
       description,
       createdOn: new Date(),
       new: true
@@ -118,7 +123,7 @@ export default function AddEntryForm() {
       payload: formData
     });
 
-    await setLoading(false);
+    resetFormData();
   };
 
   const handleTypeRadioChange = function(e) {
@@ -134,6 +139,20 @@ export default function AddEntryForm() {
       formatValue: e.target.value,
       rawValue: transformDateStringToDate(e.target.value)
     });
+    setcountsDownTo({
+      formatValue: e.target.value,
+      rawValue: transformDateStringToDate(e.target.value)
+    });
+  };
+
+  const resetFormData = function() {
+    setLoading(false);
+    setEntryType(`type-counter`);
+    setStartsOn({
+      formatValue: formatDateForDateInput(now),
+      rawValue: now
+    });
+    setDescription("");
   };
 
   return (
@@ -215,6 +234,7 @@ export default function AddEntryForm() {
                 name="counts-down-to"
                 required
                 onChange={handleDatePickerChange}
+                value={countsDownTo.formatValue}
               />
             </label>
           </div>
