@@ -13,3 +13,6 @@
 - make sounds / alerts / SMS when a timer is done (?)
 - fix absurdly big dates
 - if the alt. date has the word days in it, disable the click/flip
+- change favicon
+- change share image
+- change icon images
