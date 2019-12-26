@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { TiPlus } from "react-icons/ti";
+import { useStateValue } from "./AppState";
+import Button from "./Button";
 
 const StyledFooter = styled.footer`
   position: absolute;
@@ -14,27 +15,20 @@ const StyledFooter = styled.footer`
   align-items: center;
   padding: 5px 15px;
   border-top: 1px solid var(--color-silver);
-
-  a {
-    display: inline-block;
-    color: var(--color-black);
-    font-size: 2.4rem;
-    text-decoration: none;
-    margin: 0;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-  span {
-    letter-spacing: 0.5px;
-  }
 `;
 
 export default function Footer() {
+  const [state, dispatch] = useStateValue();
+
+  const handleAddEntryClick = function() {
+    console.log("add entry!");
+  };
+
   return (
     <StyledFooter>
-      <Link to="/">
+      <Button icon={<TiPlus />} handleClick={handleAddEntryClick}>
         <TiPlus />
-      </Link>
+      </Button>
     </StyledFooter>
   );
 }

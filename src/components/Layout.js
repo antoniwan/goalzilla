@@ -16,13 +16,17 @@ const StyledLayout = styled.div`
   }
 `;
 
-export default function Layout({ children }) {
+export default function Layout({
+  header = <Header />,
+  children,
+  footer = <Footer />
+}) {
   return (
     <StyledLayout>
       <GlobalStyles />
-      <Header />
+      {header}
       <main>{children}</main>
-      <Footer />
+      {footer}
     </StyledLayout>
   );
 }

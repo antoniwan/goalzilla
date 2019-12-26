@@ -1,7 +1,8 @@
 const initialState = {
-  goals: [],
-  loading: false,
-  errors: null
+  addEntryPanel: {
+    open: false
+  },
+  entries: []
 };
 
 export default initialState;
