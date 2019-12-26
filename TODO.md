@@ -1,3 +1,5 @@
+- add 404 page
+- add entry type filters
 - add keystroke: ESC to close add entry panel
 - add analytics
 - add tracking events
