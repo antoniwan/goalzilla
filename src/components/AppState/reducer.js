@@ -1,7 +1,8 @@
 const StateReducer = (state, action) => {
+  console.info(`Dispatch Action ${action.type}`, action);
+
   switch (action.type) {
     case "openAddEntryPanel":
-      console.info(`Open Add Entry Panel`, action);
       return {
         ...state,
         addEntry: {
@@ -9,18 +10,23 @@ const StateReducer = (state, action) => {
         }
       };
     case "closeAddEntryPanel":
-      console.info(`Close Add Entry Panel`, action);
       return {
         ...state,
         addEntry: {
           panelIsOpen: false
         }
       };
-    case "addGoal":
+    case "addEntry":
+      const { entries } = state;
+      entries.push(action.payload);
       return {
-        ...state
+        ...state,
+        addEntry: {
+          panelIsOpen: false
+        },
+        entries
       };
-    case "removeGoal":
+    case "removeEntry":
       return {
         ...state
       };

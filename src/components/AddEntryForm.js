@@ -6,6 +6,7 @@ import {
   transformDateStringToDate,
   displayDatesDistance
 } from "../utils/dates";
+import { useStateValue } from "./AppState";
 
 const StyledAddEntryForm = styled.form`
   display: flex;
@@ -78,6 +79,7 @@ const StyledAddEntryForm = styled.form`
 
 export default function AddEntryForm() {
   const now = new Date();
+  const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [entryType, setEntryType] = useState("type-counter");
   const [startsOn, setStartsOn] = useState({
@@ -110,6 +112,13 @@ export default function AddEntryForm() {
       createdOn: new Date(),
       new: true
     };
+
+    await dispatch({
+      type: "addEntry",
+      payload: formData
+    });
+
+    await setLoading(false);
   };
 
   const handleTypeRadioChange = function(e) {
