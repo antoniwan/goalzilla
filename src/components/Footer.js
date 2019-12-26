@@ -19,15 +19,15 @@ const StyledFooter = styled.footer`
 
 export default function Footer() {
   const [state, dispatch] = useStateValue();
-  const { isOpen } = state.addEntryPanel;
+  const { panelIsOpen } = state.addEntry;
 
   const handleAddEntryClick = function() {
     dispatch({
-      type: isOpen ? "closeAddEntryPanel" : "openAddEntryPanel"
+      type: panelIsOpen ? "closeAddEntryPanel" : "openAddEntryPanel"
     });
   };
 
-  const icon = isOpen ? <TiTimes /> : <TiPlus />;
+  const icon = panelIsOpen ? <TiTimes /> : <TiPlus />;
 
   return (
     <StyledFooter>

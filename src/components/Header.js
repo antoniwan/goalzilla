@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   a {
     display: inline-block;
     color: var(--color-black);
-    font-size: 2.4rem;
+    font-size: 2rem;
     text-decoration: none;
     margin: 0;
     font-weight: bold;

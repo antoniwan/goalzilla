@@ -1,14 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { useStateValue } from "./AppState";
+import AddEntryForm from "./AddEntryForm";
 
 const StyledAddEntryPanel = styled.section`
   position: fixed;
   bottom: 50px;
   left: 0;
-  background-color: pink;
   width: 100%;
   transition: all 0.5s;
+  padding: 15px;
+  border-top: 1px solid var(--color-silver);
+  background: var(--color-white);
 
   &.is-open {
     bottom: 50px;
@@ -23,14 +26,11 @@ const StyledAddEntryPanel = styled.section`
 
 export default function AddEntryPanel() {
   const [state] = useStateValue();
-  const { isOpen } = state.addEntryPanel;
+  const { panelIsOpen } = state.addEntry;
   return (
-    <StyledAddEntryPanel className={isOpen ? "is-open" : "is-closed"}>
-      <h2>Add Entry</h2>
-      <ul>
-        <li>add a countdown</li>
-        <li>add a counter</li>
-      </ul>
+    <StyledAddEntryPanel className={panelIsOpen ? "is-open" : "is-closed"}>
+      <h2>Add an entry</h2>
+      <AddEntryForm />
     </StyledAddEntryPanel>
   );
 }

@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledButton = styled.button`
   display: inline-block;
   color: var(--color-black);
-  font-size: 2.6rem;
+  font-size: 2rem;
   text-decoration: none;
   margin: 0;
   font-weight: bold;

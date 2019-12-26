@@ -1,6 +1,8 @@
 const initialState = {
-  addEntryPanel: {
-    isOpen: false
+  addEntry: {
+    panelIsOpen: true,
+    checked: `type-counter`,
+    description: null
   },
   entries: []
 };

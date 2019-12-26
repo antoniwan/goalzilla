@@ -4,16 +4,16 @@ const StateReducer = (state, action) => {
       console.info(`Open Add Entry Panel`, action);
       return {
         ...state,
-        addEntryPanel: {
-          isOpen: true
+        addEntry: {
+          panelIsOpen: true
         }
       };
     case "closeAddEntryPanel":
       console.info(`Close Add Entry Panel`, action);
       return {
         ...state,
-        addEntryPanel: {
-          isOpen: false
+        addEntry: {
+          panelIsOpen: false
         }
       };
     case "addGoal":
