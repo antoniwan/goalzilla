@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Datepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {
+  formatDateForDateInput,
+  formatDateForReading,
+  transformDateStringToDate,
+  displayDatesDistance
+} from "../utils/dates";
 
 const StyledAddEntryForm = styled.form`
   display: flex;
@@ -33,7 +37,8 @@ const StyledAddEntryForm = styled.form`
     margin-right: 0.5rem;
   }
 
-  input[type="text"] {
+  input[type="text"],
+  input[type="date"] {
     display: block;
     border: 1px solid var(--color-silver);
     width: 100%;
@@ -61,43 +66,69 @@ const StyledAddEntryForm = styled.form`
     display: block;
     width: 100%;
   }
+
+  small {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
 `;
 
 export default function AddEntryForm() {
+  const now = new Date();
   const [loading, setLoading] = useState(false);
   const [entryType, setEntryType] = useState("type-counter");
-  const [startsOn, setStartsOn] = useState(new Date());
+  const [startsOn, setStartsOn] = useState({
+    formatValue: formatDateForDateInput(now),
+    rawValue: now
+  });
   const [description, setDescription] = useState("");
-  const dateFormat = `MMMM d, yyyy`;
 
   let formDisplayHelper = {
     isCounter: entryType === `type-counter` ? true : false,
     isCountdown: entryType === `type-countdown` ? true : false,
-    counterChecked: entryType === `type-counter` ? true : false,
-    countdownChecked: entryType === `type-countdown` ? true : false,
     descriptionPlaceholder:
       entryType === `type-counter` ? `Days without bread` : `Days until...`,
     submitCTA:
-      entryType === `type-counter` ? `Create counter` : `Create countdown`
+      entryType === `type-counter` ? `Create counter` : `Create countdown`,
+    startsOn: {
+      readableDate: formatDateForReading(startsOn.rawValue),
+      datesDistance: displayDatesDistance(startsOn.rawValue, now)
+    }
+  };
+
+  const handleFormSubmit = async function(e) {
+    e.preventDefault();
+    await setLoading(true);
+
+    const formData = {
+      entryType,
+      startsOn,
+      description,
+      createdOn: new Date(),
+      new: true
+    };
   };
 
   const handleTypeRadioChange = function(e) {
     setEntryType(e.target.id);
   };
 
-  const handleDatePickerChange = function(e) {
-    setStartsOn(e);
+  const handleDescriptionChange = function(e) {
+    setDescription(e.target.value);
   };
 
-  console.info(
-    `AddEntryForm State`,
-    { entryType },
-    { startsOn },
-    { description }
-  );
+  const handleDatePickerChange = function(e) {
+    setStartsOn({
+      formatValue: e.target.value,
+      rawValue: transformDateStringToDate(e.target.value)
+    });
+  };
 
   return (
-    <StyledAddEntryForm name="add-entry">
+    <StyledAddEntryForm name="add-entry" onSubmit={handleFormSubmit}>
       <div className="form-input form-input-type">
         <span className="label">Select the type of entry</span>
         <label>
@@ -107,7 +138,7 @@ export default function AddEntryForm() {
             name="type"
             value="counter"
             onChange={handleTypeRadioChange}
-            checked={formDisplayHelper.counterChecked}
+            checked={formDisplayHelper.isCounter}
           />
           Counter
         </label>
@@ -118,8 +149,8 @@ export default function AddEntryForm() {
             id="type-countdown"
             name="type"
             value="countdown"
-            onChange={date => setStartsOn(date)}
-            checked={formDisplayHelper.countdownChecked}
+            onChange={handleTypeRadioChange}
+            checked={formDisplayHelper.isCountdown}
           />
           Countdown (Not implemented!)
         </label>
@@ -133,6 +164,8 @@ export default function AddEntryForm() {
             id="description"
             name="description"
             placeholder={formDisplayHelper.descriptionPlaceholder}
+            onChange={handleDescriptionChange}
+            value={description}
           ></input>
         </label>
       </div>
@@ -142,18 +175,21 @@ export default function AddEntryForm() {
           <div className="form-input form-input-starts-on">
             <label>
               Starts on
-              <Datepicker
-                todayButton="Today"
-                selected={startsOn}
+              <input
+                type="date"
+                id="starts-on"
+                name="starts-on"
+                required
                 onChange={handleDatePickerChange}
-                maxDate={new Date()}
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-                shouldCloseOnSelect={true}
-                dateFormat={dateFormat}
+                value={startsOn.formatValue}
               />
+              <small>
+                {formDisplayHelper.startsOn.readableDate}{" "}
+                {formDisplayHelper.startsOn.datesDistance !==
+                "less than a minute"
+                  ? ` (~ ${formDisplayHelper.startsOn.datesDistance})`
+                  : ""}
+              </small>
             </label>
           </div>
         </>
@@ -164,14 +200,24 @@ export default function AddEntryForm() {
           <div className="form-input form-input-counts-down-to">
             <label>
               Counts down to
-              {/* <Datepicker /> */}
+              <input
+                type="date"
+                id="counts-down-to"
+                name="counts-down-to"
+                required
+                onChange={handleDatePickerChange}
+              />
             </label>
           </div>
         </>
       )}
 
       <div className="form-input form-input-submit">
-        <input type="submit" value={formDisplayHelper.submitCTA}></input>
+        <input
+          type="submit"
+          value={loading ? "Saving..." : formDisplayHelper.submitCTA}
+          disabled={loading ? true : false}
+        ></input>
       </div>
     </StyledAddEntryForm>
   );

@@ -5,3 +5,7 @@
 - add import/export feature (sha-1 hash)
 - add timezone setting
 - add settings panel
+- handle safari's bullshit with the date input field
+- handle a possible date format issue with timings on the add entry panel form
+- In the counter add entry form, if the date is future, change the copy to reflect this
+- add animations to the submit buttons
