@@ -1,4 +1,5 @@
 import initialState from "./initialState";
+import DebugState from "./debugState";
 import StateContext, {
   StateProvider,
   useStateValue,
@@ -9,6 +10,7 @@ import StateReducer from "./reducer";
 export default StateProvider;
 export {
   initialState,
+  DebugState,
   StateContext,
   StateProvider,
   useStateValue,
