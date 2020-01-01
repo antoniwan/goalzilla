@@ -1,7 +1,7 @@
 - add keystroke: ESC to close add entry panel
 - add analytics
 - add tracking events
-- add localStorage storage
+- [done] add localStorage storage
 - add import/export feature (sha-1 hash)
 - add timezone setting
 - add settings panel
