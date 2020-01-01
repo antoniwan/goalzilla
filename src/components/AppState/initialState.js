@@ -53,11 +53,11 @@ const stateWithEntries = {
 
 const initialState = {
   addEntry: {
-    panelIsOpen: true,
+    panelIsOpen: false,
     checked: `type-counter`,
     description: null
   },
   entries: []
 };
 
-export default stateWithEntries;
+export default initialState;

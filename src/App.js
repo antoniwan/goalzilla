@@ -6,8 +6,10 @@ import StateProvider, {
 } from "./components/AppState";
 
 function App() {
+  const stateFromLocalStorage =
+    JSON.parse(localStorage.getItem("AppState")) || initialState;
   return (
-    <StateProvider initialState={initialState} reducer={StateReducer}>
+    <StateProvider initialState={stateFromLocalStorage} reducer={StateReducer}>
       <AppRouter />
     </StateProvider>
   );

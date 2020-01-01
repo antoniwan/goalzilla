@@ -182,7 +182,7 @@ export default function AddEntryForm() {
             onChange={handleTypeRadioChange}
             checked={formDisplayHelper.isCountdown}
           />
-          Countdown (Not implemented!)
+          Countdown
         </label>
       </div>
 
